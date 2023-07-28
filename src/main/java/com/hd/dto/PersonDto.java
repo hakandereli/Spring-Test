@@ -1,5 +1,6 @@
 package com.hd.dto;
 
+import com.hd.entity.Address;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;

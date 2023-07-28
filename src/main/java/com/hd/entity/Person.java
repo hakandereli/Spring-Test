@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import org.hibernate.annotations.ForeignKey;
+
 
 /**
  * @author hdereli
@@ -41,5 +43,6 @@ public class Person {
 
     @OneToMany
     @JoinColumn(name = "PERSON_ADDRESS_ID")
+    @ForeignKey(name = "FK_PERSON_ADDRESS")
     private List<Address> adressList;
 }

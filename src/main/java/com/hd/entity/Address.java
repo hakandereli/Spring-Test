@@ -2,6 +2,7 @@ package com.hd.entity;
 
 import com.hd.enums.EnumAddressType;
 import lombok.*;
+import org.hibernate.annotations.ForeignKey;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class Address implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "PERSON_ADDRESS_ID")
+    @ForeignKey(name = "FK_ADDRESS_PERSON")
     private Person person;
 
 }
