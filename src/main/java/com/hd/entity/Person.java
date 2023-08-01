@@ -41,6 +41,19 @@ public class Person {
     @Column(length = 100, name = "LAST_NAME")
     private String lastName;
 
+    @Column(columnDefinition = "NUMERIC(3)", name = "AGE")
+    private Long age;
+
+    //Toplam 8 basamak 2 basamak ise virgulden sonrası demek
+    @Column(columnDefinition = "DECIMAL(8,2)", name = "SALARY")
+    private Double salary;
+
+    @Column(length = 300, name = "EMAIL")
+    private String email;
+
+    @Column(length = 15, name = "PHONE")
+    private String phone;
+
     @OneToMany
     @JoinColumn(name = "PERSON_ADDRESS_ID")
     @ForeignKey(name = "FK_PERSON_ADDRESS")

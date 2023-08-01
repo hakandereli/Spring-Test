@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -23,15 +24,17 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode(of = {"id"})
 public class AddressDto {
+
     private Long id;
 
-    @Column(length = 500, name = "ADDRESS")
+    @NotNull(message = "Must be not null address")
+    @Size(min = 25, message = "lastName must be at least 25 characters")
     private String address;
 
-    @Enumerated
-    @Column(length = 30, name = "ADRESS_TYPE")
+    @NotNull(message = "Must be not null adressType")
     private EnumAddressType adressType;
 
+    @NotNull(message = "Must be not null active")
     private Boolean active;
 //    private Person person;
 }
