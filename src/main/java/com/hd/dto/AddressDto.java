@@ -33,5 +33,5 @@ public class AddressDto {
     private EnumAddressType adressType;
 
     private Boolean active;
-    private Person person;
+//    private Person person;
 }

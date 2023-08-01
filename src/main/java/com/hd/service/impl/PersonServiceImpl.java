@@ -1,5 +1,6 @@
 package com.hd.service.impl;
 
+import com.hd.dto.AddressDto;
 import com.hd.dto.PersonDto;
 import com.hd.entity.Address;
 import com.hd.entity.Person;
@@ -33,25 +34,45 @@ public class PersonServiceImpl implements PersonService {
     @Override
     @Transactional
     public PersonDto save(PersonDto personDto) {
-        Assert.notNull(personDto.getName(), "Name Field invalid!");
+//        Assert.notNull(personDto.getName(), "Name Field invalid!");
 
-        Person person = new Person();
-        person.setName(personDto.getName());
-        person.setLastName(personDto.getLastName());
+        Person person = convertPersonDtoToPerson(personDto);
+
         final Person personDb = personRepository.save(person);
 
-        List<Address> addressList = new ArrayList<>();
-        personDto.getAddressList().forEach(item -> {
-            Address address = new Address();
-            address.setAddress(item);
-            address.setAdressType(EnumAddressType.OTHER);
-            address.setActive(true);
-            address.setPerson(personDb);
-            addressList.add(address);
-        });
-        addressRepository.saveAll(addressList);
+        addressRepository.saveAll(personDb.getAdressList());
         personDto.setId(personDb.getId());
+
         return personDto;
+    }
+
+    private Person convertPersonDtoToPerson(PersonDto personDto) {
+
+        Person person = new Person();
+
+        person.setName(personDto.getName());
+        person.setLastName(personDto.getLastName());
+        person.setAdressList(convertAddressDtoToAddress(personDto.getAddressList()));
+
+        return person;
+    }
+
+    private List<Address> convertAddressDtoToAddress(List<AddressDto> addressDtoList) {
+
+        List<Address> addressList = new ArrayList<>();
+
+        for (AddressDto addressDto : addressDtoList) {
+
+            Address address = new Address();
+
+            address.setAddress(addressDto.getAddress());
+            address.setActive(addressDto.getActive());
+            address.setAdressType(addressDto.getAdressType());
+            addressList.add(address);
+        }
+
+
+        return addressList;
     }
 
     @Override
@@ -61,21 +82,22 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<PersonDto> findAll() {
-        List<Person> kisiler = personRepository.findAll();
-        List<PersonDto> personDtos = new ArrayList<>();
-
-        kisiler.forEach(it -> {
-            PersonDto personDto =new PersonDto();
-            personDto.setId(it.getId());
-            personDto.setName(it.getName());
-            personDto.setLastName(it.getLastName());
-            personDto.setAddressList(
-                    it.getAdressList() != null ?
-                    it.getAdressList().stream().map(Address::getAddress).collect(Collectors.toList())
-                            : null);
-            personDtos.add(personDto);
-        });
-        return personDtos;
+//        List<Person> kisiler = personRepository.findAll();
+//        List<PersonDto> personDtos = new ArrayList<>();
+//
+//        kisiler.forEach(it -> {
+//            PersonDto personDto =new PersonDto();
+//            personDto.setId(it.getId());
+//            personDto.setName(it.getName());
+//            personDto.setLastName(it.getLastName());
+//            personDto.setAddressList(
+//                    it.getAdressList() != null ?
+//                    it.getAdressList().stream().map(Address::getAddress).collect(Collectors.toList())
+//                            : null);
+//            personDtos.add(personDto);
+//        });
+//        return personDtos;
+        return null;
     }
 
     @Override

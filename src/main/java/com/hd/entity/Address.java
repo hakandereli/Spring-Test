@@ -36,9 +36,9 @@ public class Address implements Serializable {
     @Column(name = "ACTIVE")
     private Boolean active;
 
-    @ManyToOne
-    @JoinColumn(name = "PERSON_ADDRESS_ID")
-    @ForeignKey(name = "FK_ADDRESS_PERSON")
-    private Person person;
+//    @ManyToOne
+//    @JoinColumn(name = "PERSON_ADDRESS_ID")
+//    @ForeignKey(name = "FK_ADDRESS_PERSON")
+//    private Person person;
 
 }

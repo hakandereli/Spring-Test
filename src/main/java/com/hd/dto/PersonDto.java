@@ -24,5 +24,5 @@ public class PersonDto {
 
     private String lastName;
 
-    private List<String> addressList;
+    private List<AddressDto> addressList;
 }
