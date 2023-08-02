@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "1f73d4cc-203f-440c-810d-9f4f2ff8c6d8",
+		"name": "Spring test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5044408"
+	},
+	"item": [
+		{
+			"name": "save person",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Hakan\",\r\n    \"lastName\": \"Dereli\",\r\n    \"age\":55,\r\n    \"salary\":123456.45,\r\n    \"email\":\"asd@asd.com\",\r\n    \"phone\": \"+851112223344\",\r\n    \"addressList\":[\r\n         {\r\n            \"address\":\"hasan mah. no:5 ataşehir/istanbul\",\r\n            \"adressType\":\"HOME\",\r\n            \"active\":true\r\n        },\r\n        {\r\n            \"address\":\"ulu mah. no:11 kadıköy/istanbul\",\r\n            \"adressType\":\"WORK\",\r\n            \"active\":false\r\n        }\r\n    \r\n    ]        \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/person/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"person",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update person",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\" : \"Hakan\",\r\n    \"lastName\": \"Dereli\",\r\n    \"age\":55,\r\n    \"salary\":123456.45,\r\n    \"email\":\"asd@asd.com\",\r\n    \"phone\": \"+851112223344\",\r\n    \"addressList\":[\r\n         {\r\n            \"address\":\"hasan mah. no:5 ataşehir/istanbul\",\r\n            \"adressType\":\"HOME\",\r\n            \"active\":true\r\n        },\r\n        {\r\n            \"address\":\"ulu mah. no:11 kadıköy/istanbul\",\r\n            \"adressType\":\"WORK\",\r\n            \"active\":false\r\n        }\r\n    \r\n    ]        \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/persons/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Hakan\",\r\n    \"lastName\": \"Dereli\",\r\n    \"age\":55,\r\n    \"salary\":123456.45,\r\n    \"email\":\"asd@asd.com\",\r\n    \"phone\": \"+851112223344\",\r\n    \"addressList\":[\r\n         {\r\n            \"address\":\"hasan mah. no:5 ataşehir/istanbul\",\r\n            \"adressType\":\"HOME\",\r\n            \"active\":true\r\n        },\r\n        {\r\n            \"address\":\"ulu mah. no:11 kadıköy/istanbul\",\r\n            \"adressType\":\"WORK\",\r\n            \"active\":false\r\n        }\r\n    \r\n    ]        \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/person/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"person",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete by ıd",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Hakan\",\r\n    \"lastName\": \"Dereli\",\r\n    \"age\":55,\r\n    \"salary\":123456.45,\r\n    \"email\":\"asd@asd.com\",\r\n    \"phone\": \"+851112223344\",\r\n    \"addressList\":[\r\n         {\r\n            \"address\":\"hasan mah. no:5 ataşehir/istanbul\",\r\n            \"adressType\":\"HOME\",\r\n            \"active\":true\r\n        },\r\n        {\r\n            \"address\":\"ulu mah. no:11 kadıköy/istanbul\",\r\n            \"adressType\":\"WORK\",\r\n            \"active\":false\r\n        }\r\n    \r\n    ]        \r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/persons/{1}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"persons",
+						"{1}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
