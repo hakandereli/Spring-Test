@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ForeignKey;
 
 
@@ -54,7 +56,7 @@ public class Person {
     @Column(length = 15, name = "PHONE")
     private String phone;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "PERSON_ADDRESS_ID")
     @ForeignKey(name = "FK_PERSON_ADDRESS")
     private List<Address> adressList;
