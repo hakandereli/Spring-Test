@@ -4,7 +4,6 @@ import com.hd.dto.AddressDto;
 import com.hd.dto.PersonDto;
 import com.hd.entity.Address;
 import com.hd.entity.Person;
-import com.hd.enums.EnumAddressType;
 import com.hd.repo.AddressRepository;
 import com.hd.repo.PersonRepository;
 import com.hd.service.PersonService;
@@ -13,11 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author hdereli
@@ -46,6 +43,41 @@ public class PersonServiceImpl implements PersonService {
         return personDto;
     }
 
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    @Override
+    public List<PersonDto> findAll() {
+        List<Person> persons = personRepository.findAll();
+
+        List<PersonDto> personDtoList = new ArrayList<>();
+
+        persons.forEach(personDb -> {
+            PersonDto personDto =new PersonDto();
+            personDto.setId(personDb.getId());
+            personDto.setName(personDb.getName());
+            personDto.setLastName(personDb.getLastName());
+            personDto.setAge(personDb.getAge());
+            personDto.setSalary(personDb.getSalary());
+            personDto.setEmail(personDb.getEmail());
+            personDto.setPhone(personDb.getPhone());
+            personDto.setAddressList(
+                    personDb.getAdressList() != null ?
+                            convertAddressListToAddressDtoList(personDb.getAdressList())
+                            : null);
+            personDtoList.add(personDto);
+        });
+
+        return personDtoList;
+    }
+
+    @Override
+    public Page<PersonDto> findAll(Pageable pageable) {
+        return null;
+    }
+
     private Person convertPersonDtoToPerson(PersonDto personDto) {
 
         Person person = new Person();
@@ -56,12 +88,12 @@ public class PersonServiceImpl implements PersonService {
         person.setSalary(personDto.getSalary());
         person.setEmail(personDto.getEmail());
         person.setPhone(personDto.getPhone());
-        person.setAdressList(convertAddressDtoToAddress(personDto.getAddressList()));
+        person.setAdressList(convertAddressDtoListToAddressList(personDto.getAddressList()));
 
         return person;
     }
 
-    private List<Address> convertAddressDtoToAddress(List<AddressDto> addressDtoList) {
+    private List<Address> convertAddressDtoListToAddressList(List<AddressDto> addressDtoList) {
 
         List<Address> addressList = new ArrayList<>();
 
@@ -69,6 +101,7 @@ public class PersonServiceImpl implements PersonService {
 
             Address address = new Address();
 
+            address.setId(addressDto.getId());
             address.setAddress(addressDto.getAddress());
             address.setActive(addressDto.getActive());
             address.setAdressType(addressDto.getAdressType());
@@ -79,33 +112,21 @@ public class PersonServiceImpl implements PersonService {
         return addressList;
     }
 
-    @Override
-    public void delete(Long id) {
+    private List<AddressDto> convertAddressListToAddressDtoList(List<Address> addressList) {
 
-    }
+        List<AddressDto> addressDtoList = new ArrayList<>();
 
-    @Override
-    public List<PersonDto> findAll() {
-//        List<Person> kisiler = personRepository.findAll();
-//        List<PersonDto> personDtos = new ArrayList<>();
-//
-//        kisiler.forEach(it -> {
-//            PersonDto personDto =new PersonDto();
-//            personDto.setId(it.getId());
-//            personDto.setName(it.getName());
-//            personDto.setLastName(it.getLastName());
-//            personDto.setAddressList(
-//                    it.getAdressList() != null ?
-//                    it.getAdressList().stream().map(Address::getAddress).collect(Collectors.toList())
-//                            : null);
-//            personDtos.add(personDto);
-//        });
-//        return personDtos;
-        return null;
-    }
+        for (Address address : addressList) {
 
-    @Override
-    public Page<PersonDto> findAll(Pageable pageable) {
-        return null;
+            AddressDto addressDto = new AddressDto();
+
+            addressDto.setId(address.getId());
+            addressDto.setAddress(address.getAddress());
+            addressDto.setActive(address.getActive());
+            addressDto.setAdressType(address.getAdressType());
+            addressDtoList.add(addressDto);
+        }
+
+        return addressDtoList;
     }
 }
