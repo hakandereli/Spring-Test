@@ -19,5 +19,7 @@ public interface PersonService {
 
     List<PersonDto> findAll();
 
+    PersonDto update(PersonDto personDto);
+
     Page<PersonDto> findAll(Pageable pageable);
 }

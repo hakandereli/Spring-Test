@@ -4,6 +4,7 @@ import com.hd.dto.AddressDto;
 import com.hd.dto.PersonDto;
 import com.hd.entity.Address;
 import com.hd.entity.Person;
+import com.hd.errorhandler.ResourceNotFoundException;
 import com.hd.repo.AddressRepository;
 import com.hd.repo.PersonRepository;
 import com.hd.service.PersonService;
@@ -74,6 +75,24 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public PersonDto update(PersonDto personDto) {
+        Person person = convertPersonDtoToPerson(personDto);
+
+        Person updatePerson = personRepository.findById(person.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Person not exist with id: " + person.getId()));
+
+        updatePerson.setId(person.getId());
+        updatePerson.setName(personDto.getName());
+        updatePerson.setLastName(personDto.getLastName());
+        updatePerson.setAge(personDto.getAge());
+        updatePerson.setEmail(person.getEmail());
+        updatePerson.setAdressList(person.getAdressList());
+        updatePerson.setSalary(person.getSalary());
+
+        return convertPersonToPersonDto(personRepository.save(updatePerson));
+    }
+
+    @Override
     public Page<PersonDto> findAll(Pageable pageable) {
         return null;
     }
@@ -82,6 +101,7 @@ public class PersonServiceImpl implements PersonService {
 
         Person person = new Person();
 
+        person.setId(personDto.getId());
         person.setName(personDto.getName());
         person.setLastName(personDto.getLastName());
         person.setAge(personDto.getAge());
@@ -91,6 +111,22 @@ public class PersonServiceImpl implements PersonService {
         person.setAdressList(convertAddressDtoListToAddressList(personDto.getAddressList()));
 
         return person;
+    }
+
+    private PersonDto convertPersonToPersonDto(Person person) {
+
+        PersonDto personDto = new PersonDto();
+
+        personDto.setId(personDto.getId());
+        personDto.setName(person.getName());
+        personDto.setLastName(person.getLastName());
+        personDto.setAge(person.getAge());
+        personDto.setSalary(person.getSalary());
+        personDto.setEmail(person.getEmail());
+        personDto.setPhone(person.getPhone());
+        personDto.setAddressList(convertAddressListToAddressDtoList(person.getAdressList()));
+
+        return personDto;
     }
 
     private List<Address> convertAddressDtoListToAddressList(List<AddressDto> addressDtoList) {
