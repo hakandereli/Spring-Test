@@ -1,10 +1,8 @@
 package com.hd.entity;
 
 import com.hd.enums.EnumAddressType;
+import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ForeignKey;
-
-import javax.persistence.*;
 import java.io.Serializable;
 /**
  * @author hdereli

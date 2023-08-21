@@ -1,10 +1,10 @@
 package com.hd.dto;
 
 import com.hd.entity.Address;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
 /**
  * @author hdereli
